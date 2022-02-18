@@ -1,5 +1,5 @@
 # What's the Next Line?
-####This is a game project that I created during the GA SEI program. 
+#### This is a game project that I created during the GA SEI program. 
 
 - How well do you know songs from the 90s? Take the challenge with a friend to see how well you know songs from the decade!! 
 
@@ -29,15 +29,15 @@
 ## Wireframes
 
 
-Homescreen ![homescreen design](photos/IMG_7610)
+Homescreen ![homescreen design](/Wireframe/IMG_7610)
 
-Playscreen ![playscreen design](photos/IMG_7612)
+Playscreen ![playscreen design](/Wireframe/IMG_7612)
 
-Message display ![message display](photos/IMG_7613)
+Message display ![message display](/Wireframe/IMG_7613)
 
-Endgame screen ![endgame screen](photos/IMG_7614)
+Endgame screen ![endgame screen](/Wireframe/IMG_7614)
 
-Stretch goal design ![stretch design](photos/IMG_7615)
+Stretch goal design ![stretch design](/Wireframe/IMG_7615)
 
 ## Stretch goals
 - create multiple genres to choose from
