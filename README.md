@@ -28,16 +28,15 @@
 
 ## Wireframes
 
+![homescreen](https://user-images.githubusercontent.com/43145834/154742665-4cd8225d-17d6-443f-a52f-17b7aca9e3f1.jpeg)
 
-Homescreen ![homescreen design](/Wireframe/IMG_7610)
+![playscreen](https://user-images.githubusercontent.com/43145834/154742699-d0188bd8-5f30-4b54-8398-76dd2bb3f269.jpeg)
 
-Playscreen ![playscreen design](/Wireframe/IMG_7612)
+![message_display](https://user-images.githubusercontent.com/43145834/154742715-c7517b3f-25bd-44ac-8421-a6c4746527f4.jpeg)
 
-Message display ![message display](/Wireframe/IMG_7613)
+![endgame](https://user-images.githubusercontent.com/43145834/154742728-075e2701-3072-4356-aac0-b0727ce783b9.jpeg)
 
-Endgame screen ![endgame screen](/Wireframe/IMG_7614)
-
-Stretch goal design ![stretch design](/Wireframe/IMG_7615)
+![stretch](https://user-images.githubusercontent.com/43145834/154742757-605373a8-09bd-4b03-b011-220c915d1a26.jpeg)
 
 ## Stretch goals
 - create multiple genres to choose from
