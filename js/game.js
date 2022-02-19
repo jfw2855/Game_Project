@@ -1,11 +1,34 @@
 console.log("game.js connected to index")
 
 // Defined DOM variables
+const title = document.getElementById("title")
+const rules = document.getElementById("rules")
+const startBtn = document.getElementById("start")
+const help = document.getElementById("help")
 
 // defined variables to keep track of the gameplay (playerScore, round)
 
+let round = 1
+let player1Score = 0
+let player2Score = 0
+
+
 // class for decades which will have a constructor (decades,songs)
     // song objects that will store the title, artist, lyrics [], questions [], answers [], choices []
+let musicLib = [];
+
+class Songs {
+    constructor(title,artist,lyrics,questions,choices,answers) {
+        this.title=title,
+        this.artist=artist,
+        this.lyrics=lyrics,
+        this.questions=questions,
+        this.choices=choices,
+        this.answers=answers
+    }
+}
+
+
 
 
 // Functions ~~~~~~~~~~~~~~~~
