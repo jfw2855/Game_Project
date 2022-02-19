@@ -1,32 +1,49 @@
-console.log("game.js connected to index")
 
 // Defined DOM variables
 const title = document.getElementById("title")
 const rules = document.getElementById("rules")
 const startBtn = document.getElementById("start")
 const help = document.getElementById("help")
+const gameContainer = document.getElementById("game-container")
+gameContainer.style.display="none"
+const option1 = document.getElementById("option1")
+const option2 = document.getElementById("option2")
+const option3 = document.getElementById("option3")
+const option4 = document.getElementById("option4")
+let optionsArr = [option1,option2,option3,option4]
+
 
 // defined variables to keep track of the gameplay (playerScore, round)
 
 let round = 1
 let player1Score = 0
 let player2Score = 0
+let questionNum = 0
+let currentSong
+let timer = 10000
 
 
 // class for decades which will have a constructor (decades,songs)
     // song objects that will store the title, artist, lyrics [], questions [], answers [], choices []
 let musicLib = [];
 
-class Songs {
-    constructor(title,artist,lyrics,questions,choices,answers) {
+class Song {
+    constructor(title,artist,lyrics,choices) {
         this.title=title,
         this.artist=artist,
         this.lyrics=lyrics,
-        this.questions=questions,
-        this.choices=choices,
-        this.answers=answers
+        this.choices=choices
     }
 }
+
+// adding one song to use for development of functions/game
+const song1 = new Song("Don't Speak", "No Doubt",["You and me, we used to be together"],["Everyday together, always","Everyday together, forever","Now we're not together","Now no longer together, sadly"])
+
+song1.answers = song1.choices[0]
+
+musicLib.push(song1)
+
+
 
 
 
@@ -34,10 +51,34 @@ class Songs {
 // Functions ~~~~~~~~~~~~~~~~
 
 // startGame - hide homescreen elements and move to next
+function startGame () {
+    console.log("start button works")
+    playRound()
+    title.style.visibility="hidden"
+    rules.style.display="none"
+    startBtn.style.display="none"
+    gameContainer.style.display="block"
+
+    
+
+}
     // keeps track of rounds
     // if rounds is > 3 , will move to endGame
 
+
 // playround - will animate the lyrics and then prompt player 1 what is the next line
+function playRound () {
+
+    currentSong=musicLib[questionNum]
+    questionNum++
+    for (let i=0; i<optionsArr.length;i++) {
+        optionsArr[i].textContent=currentSong.choices[i]
+    }
+    
+
+
+    
+}
 
 // checkRight - will determine if the player selected the right answer
     // updates score based on right/wrong answer
@@ -51,6 +92,7 @@ class Songs {
 // Eventlisteners ~~~~~~~~~~~~~~~
 
 // Play button event listener
+startBtn.addEventListener("click",startGame)
 
 // instructions hover
 
