@@ -11,9 +11,21 @@
     <div class="container">
         <h1 id="title">What's the Next Line?</h1>
         <p id="rules">Challenge a friend to see how well you know 90s lyrics!</p>
-        <button id="start"></button>
+        <div id="game-container">
+            <form>
+                <p id="question"></p>
+                <select name="song" id="songs">
+                    <option id="option1" value="1">1</option>
+                    <option id="option2" value="2">2</option>
+                    <option id="option3" value="3">3</option>
+                    <option id="option4" value="4">4</option>
+                </select>
+                <input type="submit" value="submit">
+            </form>
+        </div>
+        <button id="start">Play Game</button>
         <div id="help">?</div>   
     </div>
-    <script href="js/game.js"></script>
+    <script src="js/game.js"></script>
 </body>
 </html>
