@@ -9,9 +9,6 @@ gameContainer.style.display="none"
 const question = document.getElementById("question")
 const lyric = document.getElementById("lyric")
 const songId = document.getElementById("songId")
-const songSelection = document.querySelector("select")
-const selected = songSelection.options
-const inputBtn = document.querySelector("input")
 const option1 = document.getElementById("option1")
 const option2 = document.getElementById("option2")
 const option3 = document.getElementById("option3")
@@ -30,7 +27,7 @@ let timer = 10000
 
 
 // class for decades which will have a constructor (decades,songs)
-    // song objects that will store the title, artist, lyrics [], questions [], answers [], choices []
+    // song objects that will store the title, artist, lyrics [], questions [], answer [], choices []
 let musicLib = [];
 
 class Song {
@@ -45,7 +42,7 @@ class Song {
 // adding one song to use for development of functions/game
 const song1 = new Song("Don't Speak", "No Doubt",["You and me, we used to be together"],["Everyday together, always","Everyday together, forever","Now we're not together","Now no longer together, sadly"])
 
-song1.answers = song1.choices[0]
+song1.answer = song1.choices[0]
 
 musicLib.push(song1)
 
@@ -88,7 +85,7 @@ function playRound () {
 
     for (let i=0; i<4;i++) {
         optionsArr[i].textContent=currentSong.choices[i]
-        optionsArr[i].value=currentSong.choices[i]
+        optionsArr[i].addEventListener("click", checkSelection)
     }
     
 
@@ -100,9 +97,13 @@ function playRound () {
     // updates score based on right/wrong answer
 
 function checkSelection (e) {
-    e.preventDefault()
-    console.log("lyric selection",songSelection)
-
+    let playerSelection = e.target.textContent
+    if (playerSelection===currentSong.answer) {
+        console.log("correct!")
+    }
+    else {
+        console.log("wrong!")
+    }
 }
 
 // recall startGame to move to next round
@@ -120,7 +121,7 @@ startBtn.addEventListener("click",startGame)
 
 // player selection from form dropdown 
 
-inputBtn.addEventListener("click", checkSelection)
+
 
 // homescreen button
 
