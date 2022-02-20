@@ -6,6 +6,12 @@ const startBtn = document.getElementById("start")
 const help = document.getElementById("help")
 const gameContainer = document.getElementById("game-container")
 gameContainer.style.display="none"
+const question = document.getElementById("question")
+const lyric = document.getElementById("lyric")
+const songId = document.getElementById("songId")
+const songSelection = document.querySelector("select")
+const selected = songSelection.options
+const inputBtn = document.querySelector("input")
 const option1 = document.getElementById("option1")
 const option2 = document.getElementById("option2")
 const option3 = document.getElementById("option3")
@@ -68,11 +74,21 @@ function startGame () {
 
 // playround - will animate the lyrics and then prompt player 1 what is the next line
 function playRound () {
-
     currentSong=musicLib[questionNum]
     questionNum++
-    for (let i=0; i<optionsArr.length;i++) {
+    console.log("current soooonnng choice 0", currentSong.choices[0])
+    optionsArr[0].value=currentSong.choices[0]
+    console.log("options zero", optionsArr[0].value)
+    option1.value="pizza"
+    console.log("changed opt 1 value", option1.value)
+   
+    question.textContent=`Question ${questionNum}`
+    lyric.textContent=`Lyric: "${currentSong.lyrics}"`
+    songId.textContent=`${currentSong.title} by ${currentSong.artist}`
+
+    for (let i=0; i<4;i++) {
         optionsArr[i].textContent=currentSong.choices[i]
+        optionsArr[i].value=currentSong.choices[i]
     }
     
 
@@ -82,6 +98,12 @@ function playRound () {
 
 // checkRight - will determine if the player selected the right answer
     // updates score based on right/wrong answer
+
+function checkSelection (e) {
+    e.preventDefault()
+    console.log("lyric selection",songSelection)
+
+}
 
 // recall startGame to move to next round
     // will switch to the next song and remove the lyrics from previous song
@@ -97,6 +119,8 @@ startBtn.addEventListener("click",startGame)
 // instructions hover
 
 // player selection from form dropdown 
+
+inputBtn.addEventListener("click", checkSelection)
 
 // homescreen button
 
