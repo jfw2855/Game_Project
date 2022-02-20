@@ -14,7 +14,9 @@ const option2 = document.getElementById("option2")
 const option3 = document.getElementById("option3")
 const option4 = document.getElementById("option4")
 let optionsArr = [option1,option2,option3,option4]
-
+const endContainer = document.getElementById("end-container")
+const endTitle = document.getElementById("endTitle")
+endContainer.style.display="none"
 
 // defined variables to keep track of the gameplay (playerScore, round)
 
@@ -23,6 +25,7 @@ let player1Score = 0
 let player2Score = 0
 let questionNum = 0
 let currentSong
+let currentPlayer = "p1"
 let timer = 10000
 
 
@@ -40,15 +43,27 @@ class Song {
 }
 
 // adding one song to use for development of functions/game
-const song1 = new Song("Don't Speak", "No Doubt",["You and me, we used to be together"],["Everyday together, always","Everyday together, forever","Now we're not together","Now no longer together, sadly"])
+const song1 = new Song(
+    "Don't Speak", 
+    "No Doubt",
+    ["You and me, we used to be together"],
+    ["Everyday together, always","Everyday together, forever","Now we're not together","Now no longer together, sadly"]
+    )
 
 song1.answer = song1.choices[0]
 
 musicLib.push(song1)
 
+const song2 = new Song(
+    "song2 title", 
+    "song2 artist",
+    ["song lyric questions"],
+    ["1","2","3","4"]
+    )
 
+    song2.answer = song2.choices[3]
 
-
+    musicLib.push(song2)
 
 
 // Functions ~~~~~~~~~~~~~~~~
@@ -73,12 +88,6 @@ function startGame () {
 function playRound () {
     currentSong=musicLib[questionNum]
     questionNum++
-    console.log("current soooonnng choice 0", currentSong.choices[0])
-    optionsArr[0].value=currentSong.choices[0]
-    console.log("options zero", optionsArr[0].value)
-    option1.value="pizza"
-    console.log("changed opt 1 value", option1.value)
-   
     question.textContent=`Question ${questionNum}`
     lyric.textContent=`Lyric: "${currentSong.lyrics}"`
     songId.textContent=`${currentSong.title} by ${currentSong.artist}`
@@ -97,19 +106,64 @@ function playRound () {
     // updates score based on right/wrong answer
 
 function checkSelection (e) {
+    round++
     let playerSelection = e.target.textContent
     if (playerSelection===currentSong.answer) {
+
         console.log("correct!")
+        if (currentPlayer==="p1") {
+            player1Score++
+        }
+        else {
+            player2Score++
+        }
     }
     else {
         console.log("wrong!")
     }
+    if (round<3) {
+        switchPlayer()
+        playRound()
+    }
+    else {
+        endGame()
+    }
+
 }
 
 // recall startGame to move to next round
     // will switch to the next song and remove the lyrics from previous song
+function switchPlayer () {
+    if (currentPlayer==="p1") {
+        currentPlayer="p2"
+    }
+    else {
+        currentPlayer="p1"
+    }
+}
+
+
+
+function displayWinner () {
+    if (player1Score>player2Score) {
+        endTitle.textContent=`player 1 has won!`
+    }
+    else if (player2Score>player1Score) {
+        endTitle.textContent = `player 2 has won!`
+    }
+    else {
+        endTitle.textContent = `It's a tie!`
+    }
+}
 
 // endGame - removes all play game divs and shows endGame screen
+
+function endGame () {
+    displayWinner()
+    gameContainer.style.display="none"
+    endContainer.style.display="block"
+    
+}
 
 
 // Eventlisteners ~~~~~~~~~~~~~~~
