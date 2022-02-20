@@ -1,0 +1,15 @@
+#help {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    border: darkblue 1px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+    font-size: 30px;
+    background: rgba(45, 114, 179, 0.4);
+    color: darkblue;
+}
