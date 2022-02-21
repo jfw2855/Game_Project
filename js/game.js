@@ -18,6 +18,7 @@ const endContainer = document.getElementById("end-container")
 const endTitle = document.getElementById("endTitle")
 endContainer.style.display="none"
 
+
 // defined variables to keep track of the gameplay (playerScore, round)
 
 let round = 1
@@ -27,6 +28,8 @@ let questionNum = 0
 let currentSong
 let currentPlayer = "p1"
 let timer = 10000
+let correctSound = new Audio ()
+let incorrectSound = new Audio ()
 
 
 // class for decades which will have a constructor (decades,songs)
@@ -109,7 +112,7 @@ function checkSelection (e) {
     round++
     let playerSelection = e.target.textContent
     if (playerSelection===currentSong.answer) {
-
+        playCorrectSound()
         console.log("correct!")
         if (currentPlayer==="p1") {
             player1Score++
@@ -119,6 +122,7 @@ function checkSelection (e) {
         }
     }
     else {
+        playIncorrectSound () 
         console.log("wrong!")
     }
     if (round<3) {
@@ -163,6 +167,16 @@ function endGame () {
     gameContainer.style.display="none"
     endContainer.style.display="block"
     
+}
+
+function playCorrectSound () {
+    correctSound.src="sounds/right.mp3"
+    correctSound.play()
+}
+
+function playIncorrectSound () {
+    correctSound.src="sounds/wrong.wav"
+    correctSound.play()
 }
 
 
