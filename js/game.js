@@ -7,7 +7,7 @@ const help = document.getElementById("help")
 const gameContainer = document.getElementById("game-container")
 gameContainer.style.display="none"
 const question = document.getElementById("question")
-const lyric = document.getElementById("lyric")
+const lyricLine = document.getElementById("lyricLine")
 const songId = document.getElementById("songId")
 const option1 = document.getElementById("option1")
 const option2 = document.getElementById("option2")
@@ -25,22 +25,29 @@ let round = 1
 let player1Score = 0
 let player2Score = 0
 let questionNum = 0
+let gameSongs = []
 let currentSong
 let currentPlayer = "p1"
 let timer = 10000
 let correctSound = new Audio ()
 let incorrectSound = new Audio ()
+let musicLib = []
+let musicLibEdit = []
+let answer
+let choices = []
+let randomNum
+
 
 
 // class for decades which will have a constructor (decades,songs)
-    // song objects that will store the title, artist, lyrics [], questions [], answer [], choices []
-let musicLib = [];
+    // song objects that will store the title, artist, lyric []
+
 
 class Song {
-    constructor(title,artist,lyrics,choices) {
+    constructor(title,artist,lyric) {
         this.title=title,
         this.artist=artist,
-        this.lyrics=lyrics
+        this.lyric=lyric
     }
 }
 
@@ -48,7 +55,7 @@ class Song {
 const song1 = new Song(
     "Don't Speak", 
     "No Doubt",
-    ["And if it's real, well, I don't want to know"]
+    "And if it's real, well, I don't want to know"
 )
 
 const song2 = new Song(
@@ -108,7 +115,7 @@ const song10 = new Song (
 
 const song11 = new Song (
     "Wannabe",
-    "Spice Girls"
+    "Spice Girls",
     `Taking is too easy, but that's the way it is`
 )
 
@@ -125,18 +132,86 @@ const song13 = new Song (
     "I want something else to get me through this"
 )
 
+const song14 = new Song (
+    "Always Be My Baby",
+    "Mariah Carey",
+    "But inevitably you'll be back again"
+)
+
+const song15 = new Song (
+    "California Luv",
+    "Tupac Shakur",
+    "Where cowards die and the strong ball"
+)
+
+const song16 = new Song (
+    "Gin and Juice",
+    "Snoop Dogg",
+    "As I take me a drink to the middle of the street"
+)
+
+const song17 = new Song (
+    "What's My Age Again?",
+    "Blink-182",
+    "I wore cologne to get the feeling right"
+)
+
+const song18 = new Song (
+    "Say It Ain't So",
+    "Weezer",
+    "I write you in spite of years of silence"
+)
+
+const song19 = new Song (
+    "...Baby One More Time",
+    "Britney Spears",
+    "When I'm not with you, I lose my mind"
+)
+
+const song20 = new Song (
+    "All My Life",
+    "K-Ci & JoJo",
+    "I will never find another lover sweeter than"
+)
 
 
+// Stores songs into music library array and edit version
+for (let i=1; i<21; i++) {
+musicLib.push(eval(`song${i}`))
+musicLibEdit.push(eval(`song${i}`))
+}
 
-musicLib.push(song1)
-musicLib.push(song2)
-musicLib.push(song3)
-musicLib.push(song4)
-musicLib.push(song5)
 
 
 
 // Functions ~~~~~~~~~~~~~~~~
+
+
+// random number generator - ex. if passed 3, will generate a number from 0 to 2
+function rndNum (num) {
+    return Math.floor(Math.random()*num);
+}
+
+// Picks random songs from music library array to use for gameplay
+
+function generateSongs () {
+    for (let i=0;i<8;i++) {
+        randomNum = rndNum(musicLibEdit.length)
+        gameSongs.push(musicLibEdit[randomNum])
+        musicLibEdit.splice(randomNum,1)
+
+    }
+
+}
+
+generateSongs()
+
+
+
+
+
+
+
 
 // startGame - hide homescreen elements and move to next
 function startGame () {
@@ -156,15 +231,30 @@ function startGame () {
 
 // playround - will animate the lyrics and then prompt player 1 what is the next line
 function playRound () {
-    currentSong=musicLib[questionNum]
+    let roundLib = musicLibEdit
+    let randomChoice
+    currentSong=gameSongs[questionNum]
     questionNum++
-    question.textContent=`Question ${questionNum}`
-    lyric.textContent=`Lyric: "${currentSong.lyrics}"`
-    songId.textContent=`${currentSong.title} by ${currentSong.artist}`
+    question.textContent=`Song Number ${questionNum}`
+    lyricLine.textContent=`Lyric: "${currentSong.lyric}"`
+    answer=currentSong.artist
+    choices = [answer]
+    console.log("round current choices", choices)
+
+    for (let i=0;i<3;i++) {
+        randomNum = rndNum(roundLib.length)
+         choices.push(roundLib[randomNum].artist)
+         roundLib.splice(randomNum,1)
+         console.log("adding to choices",choices)
+
+    }
 
     for (let i=0; i<4;i++) {
-        optionsArr[i].textContent=currentSong.choices[i]
+        randomNum = rndNum(choices.length)
+        randomChoice = choices[randomNum]
+        optionsArr[i].textContent=randomChoice
         optionsArr[i].addEventListener("click", checkSelection)
+        choices.splice(randomNum,1)
     }
     
 
@@ -178,8 +268,9 @@ function playRound () {
 function checkSelection (e) {
     round++
     let playerSelection = e.target.textContent
-    if (playerSelection===currentSong.answer) {
+    if (playerSelection===answer) {
         playCorrectSound()
+        songId.textContent=`${currentSong.title} by ${currentSong.artist}`
         console.log("correct!")
         if (currentPlayer==="p1") {
             player1Score++
@@ -190,9 +281,10 @@ function checkSelection (e) {
     }
     else {
         playIncorrectSound () 
+        songId.textContent=`${currentSong.title} by ${currentSong.artist}`
         console.log("wrong!")
     }
-    if (round<3) {
+    if (round<5) {
         switchPlayer()
         playRound()
     }
