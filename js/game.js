@@ -40,8 +40,7 @@ class Song {
     constructor(title,artist,lyrics,choices) {
         this.title=title,
         this.artist=artist,
-        this.lyrics=lyrics,
-        this.choices=choices
+        this.lyrics=lyrics
     }
 }
 
@@ -49,24 +48,92 @@ class Song {
 const song1 = new Song(
     "Don't Speak", 
     "No Doubt",
-    ["You and me, we used to be together"],
-    ["Everyday together, always","Everyday together, forever","Now we're not together","Now no longer together, sadly"]
-    )
-
-song1.answer = song1.choices[0]
-
-musicLib.push(song1)
+    ["And if it's real, well, I don't want to know"]
+)
 
 const song2 = new Song(
-    "song2 title", 
-    "song2 artist",
-    ["song lyric questions"],
-    ["1","2","3","4"]
-    )
+    "All star", 
+    "Smash Mouth",
+    "Somebody once asked could I spare some change for gas?"
+)
 
-    song2.answer = song2.choices[3]
 
-    musicLib.push(song2)
+const song3 = new Song(
+    "Say my name",
+    "Destiny's Child",
+    `If somebody's there then tell me who`
+)
+
+const song4 = new Song(
+    "Creep",
+    "Radiohead",
+    `I don't care if it hurts`
+)
+
+const song5 = new Song(
+    "Smooth",
+    "Santana",
+    `If you would leave it'd be a crying shame`
+)
+
+const song6 = new Song (
+    "I Swear",
+    "All-4-One",
+    `I'll love you with every beat of my heart`
+)
+
+const song7 = new Song (
+    `Tearin Up My Heart`,
+    "NSYNC",
+    "And no matter what I do, I feel the pain"
+)
+
+const song8 = new Song (
+    "Two Princes",
+    "Spin Doctors",
+    "You marry me, your father will disown you"
+)
+
+const song9 = new Song (
+    "Barbie Girl",
+    "Aqua",
+    "I can act like a star, I can beg on my knees"
+)
+
+const song10 = new Song (
+    "You Oughta Know",
+    "Alanis Morissette",
+    "Of the mess you left when you went away"
+)
+
+const song11 = new Song (
+    "Wannabe",
+    "Spice Girls"
+    `Taking is too easy, but that's the way it is`
+)
+
+const song12 = new Song (
+    "End of The Road",
+    "Boyz II Men",
+    "This time I want you to love me much more"
+
+)
+
+const song13 = new Song (
+    "Semi-Charmed Life",
+    "Third Eye Blind",
+    "I want something else to get me through this"
+)
+
+
+
+
+musicLib.push(song1)
+musicLib.push(song2)
+musicLib.push(song3)
+musicLib.push(song4)
+musicLib.push(song5)
+
 
 
 // Functions ~~~~~~~~~~~~~~~~
