@@ -17,6 +17,9 @@ let optionsArr = [option1,option2,option3,option4]
 const endContainer = document.getElementById("end-container")
 const endTitle = document.getElementById("endTitle")
 endContainer.style.display="none"
+const socreBoard = document.getElementById("scoreBoard")
+const player1SB = document.getElementById("player1SB")
+const player2SB = document.getElementById("player2SB")
 
 
 // defined variables to keep track of the gameplay (playerScore, round)
@@ -28,14 +31,16 @@ let questionNum = 0
 let gameSongs = []
 let currentSong
 let currentPlayer = "p1"
-let timer = 10000
 let correctSound = new Audio ()
 let incorrectSound = new Audio ()
 let musicLib = []
 let musicLibEdit = []
+let roundLib
 let answer
 let choices = []
 let randomNum
+let wrongAnsList = []
+let madeSelection = false
 
 
 
@@ -51,7 +56,7 @@ class Song {
     }
 }
 
-// adding one song to use for development of functions/game
+// Songs 
 const song1 = new Song(
     "Don't Speak", 
     "No Doubt",
@@ -178,7 +183,6 @@ const song20 = new Song (
 // Stores songs into music library array and edit version
 for (let i=1; i<21; i++) {
 musicLib.push(eval(`song${i}`))
-musicLibEdit.push(eval(`song${i}`))
 }
 
 
@@ -187,7 +191,7 @@ musicLibEdit.push(eval(`song${i}`))
 // Functions ~~~~~~~~~~~~~~~~
 
 
-// random number generator - ex. if passed 3, will generate a number from 0 to 2
+// random number generator - ex. if passed 3, will generate a whole number from 0 to 2
 function rndNum (num) {
     return Math.floor(Math.random()*num);
 }
@@ -195,6 +199,7 @@ function rndNum (num) {
 // Picks random songs from music library array to use for gameplay
 
 function generateSongs () {
+    musicLibEdit=musicLib
     for (let i=0;i<8;i++) {
         randomNum = rndNum(musicLibEdit.length)
         gameSongs.push(musicLibEdit[randomNum])
@@ -204,7 +209,20 @@ function generateSongs () {
 
 }
 
-generateSongs()
+
+
+
+
+//Generates the wrong answers for the round
+    // A way to fix my shallow copy issue
+function genWrongAns () {
+    while (wrongAnsList.length<3) {
+        randomNum=rndNum(12)
+        if (!wrongAnsList.includes(randomNum)) {
+            wrongAnsList.push(randomNum)
+        }
+    }
+}
 
 
 
@@ -215,38 +233,34 @@ generateSongs()
 
 // startGame - hide homescreen elements and move to next
 function startGame () {
-    console.log("start button works")
     playRound()
     title.style.visibility="hidden"
     rules.style.display="none"
     startBtn.style.display="none"
     gameContainer.style.display="block"
 
-    
-
 }
     // keeps track of rounds
-    // if rounds is > 3 , will move to endGame
+    // if rounds is > 8 , will move to endGame
 
 
 // playround - will animate the lyrics and then prompt player 1 what is the next line
 function playRound () {
-    let roundLib = musicLibEdit
+    madeSelection=false
+    songId.textContent=""
+    wrongAnsList=[]
+    genWrongAns ()
     let randomChoice
     currentSong=gameSongs[questionNum]
     questionNum++
     question.textContent=`Song Number ${questionNum}`
     lyricLine.textContent=`Lyric: "${currentSong.lyric}"`
-    answer=currentSong.artist
+    answer=currentSong.title
     choices = [answer]
-    console.log("round current choices", choices)
-
-    for (let i=0;i<3;i++) {
-        randomNum = rndNum(roundLib.length)
-         choices.push(roundLib[randomNum].artist)
-         roundLib.splice(randomNum,1)
-         console.log("adding to choices",choices)
-
+    while (wrongAnsList.length>0) {
+        let nextNum = wrongAnsList.pop()
+        choices.push(musicLibEdit[nextNum].title)
+        console.log(wrongAnsList)
     }
 
     for (let i=0; i<4;i++) {
@@ -255,22 +269,26 @@ function playRound () {
         optionsArr[i].textContent=randomChoice
         optionsArr[i].addEventListener("click", checkSelection)
         choices.splice(randomNum,1)
-    }
-    
-
-
-    
+    }  
 }
 
 // checkRight - will determine if the player selected the right answer
     // updates score based on right/wrong answer
 
 function checkSelection (e) {
+
+    // prevents player from reselecting a choice from current question
+    if (madeSelection) return
+
+    madeSelection=true
+
     round++
+
     let playerSelection = e.target.textContent
+
     if (playerSelection===answer) {
         playCorrectSound()
-        songId.textContent=`${currentSong.title} by ${currentSong.artist}`
+        songId.textContent=`Correct!!! The answer is ${currentSong.title} by ${currentSong.artist}`
         console.log("correct!")
         if (currentPlayer==="p1") {
             player1Score++
@@ -281,21 +299,20 @@ function checkSelection (e) {
     }
     else {
         playIncorrectSound () 
-        songId.textContent=`${currentSong.title} by ${currentSong.artist}`
+        songId.textContent=`Error!!! The answer is ${currentSong.title} by ${currentSong.artist}`
         console.log("wrong!")
     }
-    if (round<5) {
+    if (round<9) {
         switchPlayer()
-        playRound()
+        setTimeout(playRound,4500)
     }
     else {
-        endGame()
+        setTimeout(endGame, 4500)
     }
 
 }
 
-// recall startGame to move to next round
-    // will switch to the next song and remove the lyrics from previous song
+// will switch to the next song and remove the lyrics from previous song
 function switchPlayer () {
     if (currentPlayer==="p1") {
         currentPlayer="p2"
@@ -325,6 +342,8 @@ function endGame () {
     displayWinner()
     gameContainer.style.display="none"
     endContainer.style.display="block"
+    player1SB.textContent=`Player 1 Score: ${player1Score}`
+    player2SB.textContent=`Player 2 Score: ${player2Score}`
     
 }
 
@@ -337,7 +356,8 @@ function playIncorrectSound () {
     correctSound.src="sounds/wrong.wav"
     correctSound.play()
 }
-
+// Functions to invoke at pageload
+generateSongs()
 
 // Eventlisteners ~~~~~~~~~~~~~~~
 
@@ -345,9 +365,6 @@ function playIncorrectSound () {
 startBtn.addEventListener("click",startGame)
 
 // instructions hover
-
-// player selection from form dropdown 
-
 
 
 // homescreen button
