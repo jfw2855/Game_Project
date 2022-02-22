@@ -1,5 +1,8 @@
 
-// Defined DOM variables
+
+/* ~~~~~~~~~~~~~~~~~DOM VARIABLES ~~~~~~~~~~~~~~~~ */
+
+const homeContainer = document.getElementById("home-container")
 const title = document.getElementById("title")
 const rules = document.getElementById("rules")
 const startBtn = document.getElementById("start")
@@ -20,9 +23,11 @@ endContainer.style.display="none"
 const socreBoard = document.getElementById("scoreBoard")
 const player1SB = document.getElementById("player1SB")
 const player2SB = document.getElementById("player2SB")
+const homeBtn = document.getElementById("homeBtn")
 
 
-// defined variables to keep track of the gameplay (playerScore, round)
+/* ~~~~~~~~~~~~~~~~~ VARIABLES ~~~~~~~~~~~~~~~~ */
+// defined variables to keep track of the gameplay 
 
 let round = 1
 let player1Score = 0
@@ -43,9 +48,8 @@ let wrongAnsList = []
 let madeSelection = false
 
 
-
-// class for decades which will have a constructor (decades,songs)
-    // song objects that will store the title, artist, lyric []
+/* ~~~~~~~~~~~~~~~~~ CLASSES ~~~~~~~~~~~~~~~~ */
+// song objects that will store the title, artist, lyric
 
 
 class Song {
@@ -56,7 +60,7 @@ class Song {
     }
 }
 
-// Songs 
+
 const song1 = new Song(
     "Don't Speak", 
     "No Doubt",
@@ -180,23 +184,33 @@ const song20 = new Song (
 )
 
 
-// Stores songs into music library array and edit version
-for (let i=1; i<21; i++) {
-musicLib.push(eval(`song${i}`))
+
+
+
+
+
+
+/* ~~~~~~~~~~~~~~~~~FUNCTIONS ~~~~~~~~~~~~~~~~ */
+
+
+// makeMusicLib - stores songs into music library array and edit version
+function makeMusicLib () {
+    musicLib=[]
+    for (let i=1; i<21; i++) {
+        musicLib.push(eval(`song${i}`))
+        }
 }
 
+// rndNum - random number generator 
+    // ex. if passed 3, will generate a whole number from 0 to 2
 
-
-
-// Functions ~~~~~~~~~~~~~~~~
-
-
-// random number generator - ex. if passed 3, will generate a whole number from 0 to 2
 function rndNum (num) {
     return Math.floor(Math.random()*num);
 }
 
-// Picks random songs from music library array to use for gameplay
+
+
+// generateSongs - picks random songs from music library array to use for gameplay
 
 function generateSongs () {
     musicLibEdit=musicLib
@@ -211,10 +225,9 @@ function generateSongs () {
 
 
 
+//genWrongAns - generates the wrong answers for the round
+    // A way to fix my shallow copy issue (spliced org array)
 
-
-//Generates the wrong answers for the round
-    // A way to fix my shallow copy issue
 function genWrongAns () {
     while (wrongAnsList.length<3) {
         randomNum=rndNum(12)
@@ -226,25 +239,21 @@ function genWrongAns () {
 
 
 
+// startGame - hides homescreen elements and move to next
 
-
-
-
-
-// startGame - hide homescreen elements and move to next
 function startGame () {
+    makeMusicLib()
+    generateSongs()
+    console.log("gen song list", musicLibEdit)
     playRound()
-    title.style.visibility="hidden"
-    rules.style.display="none"
-    startBtn.style.display="none"
+    homeContainer.style.display="none"
     gameContainer.style.display="block"
-
 }
-    // keeps track of rounds
-    // if rounds is > 8 , will move to endGame
 
 
-// playround - will animate the lyrics and then prompt player 1 what is the next line
+
+// playRound - will animate the lyrics and then prompt player 1 what is the next line
+
 function playRound () {
     madeSelection=false
     songId.textContent=""
@@ -260,7 +269,6 @@ function playRound () {
     while (wrongAnsList.length>0) {
         let nextNum = wrongAnsList.pop()
         choices.push(musicLibEdit[nextNum].title)
-        console.log(wrongAnsList)
     }
 
     for (let i=0; i<4;i++) {
@@ -272,8 +280,12 @@ function playRound () {
     }  
 }
 
-// checkRight - will determine if the player selected the right answer
+
+
+
+// checkSelection - will determine if the player selected the right answer
     // updates score based on right/wrong answer
+    // will invoke endGame() if rounds>8
 
 function checkSelection (e) {
 
@@ -304,15 +316,18 @@ function checkSelection (e) {
     }
     if (round<9) {
         switchPlayer()
-        setTimeout(playRound,4500)
+        setTimeout(playRound,400)
     }
     else {
-        setTimeout(endGame, 4500)
+        setTimeout(endGame, 400)
     }
 
 }
 
-// will switch to the next song and remove the lyrics from previous song
+
+
+// switchPlayer - switches to the next song and remove the lyrics from previous song
+
 function switchPlayer () {
     if (currentPlayer==="p1") {
         currentPlayer="p2"
@@ -323,6 +338,8 @@ function switchPlayer () {
 }
 
 
+
+// displayWinner - displays who won the game in the endgame screen
 
 function displayWinner () {
     if (player1Score>player2Score) {
@@ -336,7 +353,9 @@ function displayWinner () {
     }
 }
 
-// endGame - removes all play game divs and shows endGame screen
+
+
+// endGame - removes all play game divs and shows endgame screen
 
 function endGame () {
     displayWinner()
@@ -347,19 +366,48 @@ function endGame () {
     
 }
 
+
+
+// playCorrectSound - plays "correct" sound
 function playCorrectSound () {
     correctSound.src="sounds/right.mp3"
     correctSound.play()
 }
 
+
+
+// playIncorrectSound - plays "incorrect" sound
 function playIncorrectSound () {
     correctSound.src="sounds/wrong.wav"
     correctSound.play()
 }
-// Functions to invoke at pageload
-generateSongs()
 
-// Eventlisteners ~~~~~~~~~~~~~~~
+
+// returnHome - returns to the homescreen to allow players to replay game
+    // resets all gameplay values 
+function returnHome () {
+    endContainer.style.display="none"
+    homeContainer.style.display="block"
+    round = 1
+    player1Score = 0
+    player2Score = 0
+    questionNum = 0
+    gameSongs = []
+    currentSongn = ""
+    currentPlayer = "p1"
+    musicLib = []
+    musicLibEdit = ""
+    roundLib = ""
+    answer = ""
+    choices = []
+    wrongAnsList = []
+    madeSelection = false
+
+}
+
+
+
+/* ~~~~~~~~~~~~~~~~~EVENTLISTENERS ~~~~~~~~~~~~~~~~ */
 
 // Play button event listener
 startBtn.addEventListener("click",startGame)
@@ -368,4 +416,8 @@ startBtn.addEventListener("click",startGame)
 
 
 // homescreen button
+
+homeBtn.addEventListener("click",returnHome)
+
+
 
