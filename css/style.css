@@ -1,3 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Padauk&display=swap');
+
+#title {
+    margin-top: 50px;
+    font-family: 'Audiowide', cursive;
+    font-size: 70px;
+}
+
+
+#home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#rules {
+    font-size: 25px;
+    font-family: 'Padauk', sans-serif;
+    font-weight: bold;
+}
+
+
+#start {
+    background-color: rgb(231, 49, 95);
+    color: white;
+    font-size: 25px;
+    font-family: 'Audiowide', cursive;
+}
+
+#start:hover {
+    background-color: white;
+    color: rgb(231, 49, 95);
+}
+
+
+
+
 #help {
     position: absolute;
     top: 10px;
@@ -13,3 +52,57 @@
     background: rgba(45, 114, 179, 0.4);
     color: darkblue;
 }
+
+.hide {
+    display: none;
+}
+  
+#help:hover + .hide {
+    display: block;
+    color: white;
+    position: fixed;
+    top: 50px;
+    right: 0;
+    width: 200px;
+    height: 70px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.603);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Padauk', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 7px;
+
+}
+
+
+
+
+
+.db {
+    width: 100px;
+    height: 100px;
+    position: fixed;
+    bottom: 0;
+    animation-name: example;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+  }
+  
+  @keyframes example {
+    0%   {left:0px; right:200px;}
+    25%  {left:200px; right:0px;}
+    50%  {left:0; right:200px;}
+    75%  {left:200px; right:0;}
+    100% {left:0px; right: 200px;}
+  }
+
+
+  body {
+      background-color: rgba(56, 144, 216, 0.822);
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+  }
