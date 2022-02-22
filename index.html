@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>What's the Next Line?</title>
+    <title>GUESS THAT 90'S SONG</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="container">
-        <h1 id="title">What's the Next Line?</h1>
-        <p id="rules">Challenge a friend to see how well you know 90s lyrics!</p>
+        <div id="home-container">
+            <h1 id="title">GUESS THAT 90'S SONG</h1>
+            <p id="rules">Challenge a friend to see how well you know 90s lyrics! Select the song that matches the lyric!</p>
+            <button id="start">Play Now</button>
+            <img class="db" src="images/theme90s.gif" alt="dancing_banana">
+        </div>
         <div id="game-container"> 
                 <p id="question"></p>
                 <p id="lyricLine"></p>
@@ -26,11 +30,13 @@
                 <div id="player1SB"></div>
                 <div id="player2SB"></div>
             </div>
+            <button id="homeBtn">Restart</button>
 
         </div>
-        <button id="start">Play Game</button>
-        <div id="help">?</div>   
+
     </div>
+    <div id="help">?</div>
+    <div class="hide">Select a song to answer the question</div>  
     <script src="js/game.js"></script>
 </body>
 </html>
