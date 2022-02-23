@@ -247,7 +247,7 @@ function startGame () {
     console.log("gen song list", musicLibEdit)
     playRound()
     homeContainer.style.display="none"
-    gameContainer.style.display="block"
+    gameContainer.style.display="flex"
 }
 
 
@@ -300,6 +300,7 @@ function checkSelection (e) {
 
     if (playerSelection===answer) {
         playCorrectSound()
+        e.target.classList.add("correct")
         songId.textContent=`Correct!!! The answer is ${currentSong.title} by ${currentSong.artist}`
         console.log("correct!")
         if (currentPlayer==="p1") {
@@ -310,12 +311,18 @@ function checkSelection (e) {
         }
     }
     else {
-        playIncorrectSound () 
+        playIncorrectSound ()
+        e.target.classList.add("wrong") 
         songId.textContent=`Error!!! The answer is ${currentSong.title} by ${currentSong.artist}`
         console.log("wrong!")
     }
-    if (round<9) {
+    setTimeout(function () {
+        e.target.classList.remove("correct")
+        e.target.classList.remove("wrong")
+    },390)
+    if (round<3) {
         switchPlayer()
+
         setTimeout(playRound,400)
     }
     else {
@@ -360,7 +367,7 @@ function displayWinner () {
 function endGame () {
     displayWinner()
     gameContainer.style.display="none"
-    endContainer.style.display="block"
+    endContainer.style.display="flex"
     player1SB.textContent=`Player 1 Score: ${player1Score}`
     player2SB.textContent=`Player 2 Score: ${player2Score}`
     
@@ -387,7 +394,8 @@ function playIncorrectSound () {
     // resets all gameplay values 
 function returnHome () {
     endContainer.style.display="none"
-    homeContainer.style.display="block"
+    homeContainer.style.display="flex"
+    
     round = 1
     player1Score = 0
     player2Score = 0
