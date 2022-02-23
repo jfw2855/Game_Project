@@ -28,7 +28,7 @@ const homeBtn = document.getElementById("homeBtn")
 
 
 /* ~~~~~~~~~~~~~~~~~ VARIABLES ~~~~~~~~~~~~~~~~ */
-// defined variables to keep track of the gameplay 
+// defined variables to keep track of during gameplay 
 
 let round = 1
 let player1Score = 0
@@ -78,7 +78,7 @@ const song2 = new Song(
 
 
 const song3 = new Song(
-    "Say my name",
+    "Say My Name",
     "Destiny's Child",
     `If somebody's there then tell me who`
 )
@@ -186,11 +186,96 @@ const song20 = new Song (
     "I will never find another lover sweeter than"
 )
 
+const song21 = new Song (
+    "Smells Like Teen Spirit",
+    "Nirvana",
+    "A mulatto, an albino, a mosquito, my libido"
+)
 
+const song22 = new Song (
+    "No Diggity",
+    "Blackstreet and Dr. Dre",
+    "I like the way you work it"
+)
 
+const song23 = new Song (
+    "Wonderwall",
+    "Oasis",
+    "You're gonna be the one that saves me"
+)
 
+const song24 = new Song (
+    "Gettin' Jiggy Wit It",
+    "Will Smith",
+    "Dance floor pro, I know you know"
+)
 
+const song25 = new Song (
+    "What is Love",
+    "Haddaway",
+    "Baby, don't hurt me, don't hurt me"
+)
 
+const song26 = new Song (
+    "Big Poppa",
+    "The Notorious B.I.G.",
+    "Throw your hands in the air if you's a true player"
+)
+
+const song27 = new Song (
+    "Gonna Make You Sweat",
+    "C+C Music Factory",
+    "The crowd is live and I pursue this groove"
+)
+
+const song28 = new Song (
+    "Remember the Time",
+    "Michael Jackson",
+    "You and me in Spain"
+)
+
+const song29 = new Song (
+    "Bitter Sweet Symphony",
+    "The Verve",
+    "I'll take you down the only road I've ever been down"
+)
+
+const song30 = new Song (
+    "My Heart Will Go On",
+    "Celine Dion",
+    "Near, far, wherever you are"
+)
+
+const song31 = new Song (
+    "I Don't Want to Miss a Thing",
+    "Aerosmith",
+    "I don't want to close my eyes"
+)
+
+const song32 = new Song (
+    "Un-Break My Heart",
+    "Toni Braxton",
+    "Don't leave me out in the rain"
+)
+
+const song33 = new Song (
+    "You're Still the One",
+    "Shania Twain",
+    "The one that I belong to"
+
+)
+
+const song34 = new Song (
+    "Zombie",
+    "The Cranberries",
+    "What's in your head, in your head"
+)
+
+const song35 = new Song (
+    "My Name Is",
+    "Eminem",
+    "Ninety-nine percent of my life I was lied to"
+)
 
 
 /* ~~~~~~~~~~~~~~~~~FUNCTIONS ~~~~~~~~~~~~~~~~ */
@@ -199,7 +284,7 @@ const song20 = new Song (
 // makeMusicLib - stores songs into music library array and edit version
 function makeMusicLib () {
     musicLib=[]
-    for (let i=1; i<21; i++) {
+    for (let i=1; i<36; i++) {
         musicLib.push(eval(`song${i}`))
         }
 }
@@ -311,13 +396,6 @@ function timer () {
     }
     count --
 }
-
-
-
-
-
-
-
 
 
 
