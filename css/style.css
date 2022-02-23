@@ -97,39 +97,63 @@ span {
 
 }
 
+#question {
+    font-size: 50px;
+    font-family: 'Audiowide', cursive;
+
+}
+
+#lyricLine, #songId {
+    font-size: 40px;
+    font-family: 'Padauk', sans-serif;
+}
+
+
+
 button {
     font-family: 'Audiowide', cursive;
 }
 
+.optBtns {
+    background: white;
+    color: rgb(44, 44, 233);
+}
+
+.optBtns:hover {
+    background: rgb(44, 44, 233);
+    color: white;
+}
+
+#songId {
+    font-size: 20px;
+}
+
 .correct {
     background-color: rgb(14, 206, 46);
+    color: white;
 }
 .wrong {
     background-color: rgb(223, 27, 27);
+    color: white;
 }
 
-.db {
-    width: 100px;
-    height: 100px;
-    position: fixed;
-    bottom: 0;
-    animation-name: example;
-    animation-duration: 4s;
-    animation-iteration-count: infinite;
-  }
-  
-  @keyframes example {
-    0%   {left:0px; right:200px;}
-    25%  {left:200px; right:0px;}
-    50%  {left:0; right:200px;}
-    75%  {left:200px; right:0;}
-    100% {left:0px; right: 200px;}
-  }
 
 
   body {
-      background-image: linear-gradient(toright rgb(219, 43, 43), rgb(233, 198, 43));
+    background: rgb(217,94,127);
+    background: linear-gradient(90deg, rgba(217,94,127,1) 0%, rgba(201,121,222,1) 48%, rgba(144,69,185,1) 100%);
       display: flex;
       align-items: center;
       flex-direction: column;
+  }
+
+  #homeBtn {
+      background-color: rgb(105, 23, 105);
+      color: white;
+      margin-top: 30px;
+  }
+
+  #homeBtn:hover {
+    color: rgb(105, 23, 105);
+    background-color: white;
   }
