@@ -6,6 +6,8 @@
     margin-top: 50px;
     font-family: 'Audiowide', cursive;
     font-size: 70px;
+    text-shadow: 6px 5px #833737;
+    color: white;
 }
 
 span {
@@ -38,6 +40,7 @@ span {
     font-size: 25px;
     font-family: 'Padauk', sans-serif;
     font-weight: bold;
+    text-align: center;
 }
 
 
@@ -94,6 +97,7 @@ span {
     font-size: 18px;
     font-weight: bold;
     padding: 7px;
+   
 
 }
 
@@ -125,7 +129,10 @@ button {
 }
 
 #songId {
-    font-size: 20px;
+    font-size: 25px;
+    color: rgb(216, 221, 221);
+    font-family: 'Audiowide', cursive;
+
 }
 
 
@@ -166,6 +173,16 @@ button {
       flex-direction: column;
   }
   
+
+#end-container {
+    font-family: 'Audiowide', cursive;
+}
+
+#endTitle {
+    font-size: 40px;
+    margin-top: 100px;
+}
+
 
   #homeBtn {
       background-color: rgb(105, 23, 105);
