@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Padauk&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
 #title {
     margin-top: 50px;
@@ -7,8 +8,26 @@
     font-size: 70px;
 }
 
+span {
+    font-family: 'Permanent Marker', cursive;
+    animation-name: multicolor;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+  }
+  
+  @keyframes multicolor {
 
-#home-container {
+    0%   {color:rgb(177, 34, 82)}
+    20%   {color:rgb(155, 86, 22)}
+    40%   {color: rgb(187, 161, 16)}
+    60%  {color: rgb(26, 141, 150)}
+    80% {color: rgb(26, 53, 206)}
+    100%  {color: rgb(74, 28, 148)}
+  }
+
+
+
+#home-container,#game-container,#end-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -43,14 +62,15 @@
     right: 10px;
     width: 40px;
     height: 40px;
-    border: darkblue 1px solid;
+    border: white 2px solid;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 25px;
     font-size: 30px;
-    background: rgba(45, 114, 179, 0.4);
-    color: darkblue;
+    background: rgba(22, 115, 202, 0.514);
+    color: rgba(255, 255, 255, 0.733);
+    font-family: 'Audiowide', cursive;
 }
 
 .hide {
@@ -77,9 +97,16 @@
 
 }
 
+button {
+    font-family: 'Audiowide', cursive;
+}
 
-
-
+.correct {
+    background-color: rgb(14, 206, 46);
+}
+.wrong {
+    background-color: rgb(223, 27, 27);
+}
 
 .db {
     width: 100px;
@@ -101,7 +128,7 @@
 
 
   body {
-      background-color: rgba(56, 144, 216, 0.822);
+      background-image: linear-gradient(toright rgb(219, 43, 43), rgb(233, 198, 43));
       display: flex;
       align-items: center;
       flex-direction: column;
