@@ -12,6 +12,7 @@ gameContainer.style.display="none"
 const question = document.getElementById("question")
 const lyricLine = document.getElementById("lyricLine")
 const songId = document.getElementById("songId")
+const timeLeft = document.getElementById("timeLeft")
 const option1 = document.getElementById("option1")
 const option2 = document.getElementById("option2")
 const option3 = document.getElementById("option3")
@@ -257,7 +258,9 @@ function startGame () {
 // playRound - will animate the lyrics and then prompt player 1 what is the next line
 
 function playRound () {
+    
     count = 3
+    timeLeft.textContent = count
     countdown = setInterval (timer, 1000)
     madeSelection=false
     songId.textContent=""
@@ -288,10 +291,13 @@ function playRound () {
 // timer - displays time left to answer the question
 
 function timer () {
+    timeLeft.textContent = count
     if (count === 0 && !madeSelection) {
         
         clearInterval(countdown)
         playIncorrectSound ()
+        madeSelection=true
+        round++
         songId.textContent=`Time is up! The answer is ${currentSong.title} by ${currentSong.artist}`
         console.log("time's up!")
         if (round<3) {
@@ -302,9 +308,6 @@ function timer () {
         else {
             setTimeout(endGame, 400)
         }
-    }
-    else {
-        console.log("time remaining", count)
     }
     count --
 }
