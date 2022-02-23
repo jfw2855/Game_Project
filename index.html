@@ -13,17 +13,20 @@
             <h1 id="title">GUESS THAT <span>90's</span> SONG</h1>
             <p id="rules">Challenge a friend to see how well you know 90s lyrics! Select the song that matches the lyric!</p>
             <button id="start">Play Now</button>
-            <img class="db" src="images/theme90s.gif" alt="dancing_banana">
         </div>
         <div id="game-container"> 
                 <p id="question"></p>
                 <p id="lyricLine"></p>
                 <p id="songId"></p>
+                <div class="time-container">
+                    <div id="timeLeft">3</div>
+                </div>
+
                 <div class="choiceBtns">
-                    <button id="option1"></button>
-                    <button id="option2"></button>
-                    <button id="option3"></button>
-                    <button id="option4"></button>
+                    <button class="optBtns" id="option1"></button>
+                    <button class="optBtns" id="option2"></button>
+                    <button class="optBtns" id="option3"></button>
+                    <button class="optBtns" id="option4"></button>
                 </div>
 
         </div>
@@ -39,7 +42,7 @@
 
     </div>
     <div id="help">?</div>
-    <div class="hide">Select a song to answer the question</div>  
+    <div class="hide">Select a song to answer the question</div> 
     <script src="js/game.js"></script>
 </body>
 </html>
