@@ -47,7 +47,7 @@ let choices = []
 let randomNum
 let wrongAnsList = []
 let madeSelection = false
-let count = 3
+let count = 10
 let countdown 
 
 
@@ -318,7 +318,7 @@ function generateSongs () {
 
 function genWrongAns () {
     while (wrongAnsList.length<3) {
-        randomNum=rndNum(12)
+        randomNum=rndNum(musicLibEdit.length)
         if (!wrongAnsList.includes(randomNum)) {
             wrongAnsList.push(randomNum)
         }
@@ -340,11 +340,11 @@ function startGame () {
 
 
 
-// playRound - will animate the lyrics and then prompt player 1 what is the next line
+// playRound - prompts current player with a lyric and song title options
 
 function playRound () {
     
-    count = 3
+    count = 10
     timeLeft.textContent = count
     countdown = setInterval (timer, 1000)
     madeSelection=false
@@ -352,22 +352,34 @@ function playRound () {
     wrongAnsList=[]
     genWrongAns ()
     let randomChoice
+
+    // Sets current round song based on the index of gameSongs 
     currentSong=gameSongs[questionNum]
     questionNum++
+
+    //Displays round's song # and lyric
     question.textContent=`Song Number ${questionNum}`
     lyricLine.textContent=`Lyric: "${currentSong.lyric}"`
+
     answer=currentSong.title
+
+    // Creates choices
     choices = [answer]
+
+    // Pulls array from genWrongAns() to populate choices array with the wrong answers
     while (wrongAnsList.length>0) {
         let nextNum = wrongAnsList.pop()
         choices.push(musicLibEdit[nextNum].title)
     }
 
+    // Randomly sorts choices to option buttons and adds eventlistener to each (checkSelection)
+        // prevents first choice being the answer
     for (let i=0; i<4;i++) {
         randomNum = rndNum(choices.length)
         randomChoice = choices[randomNum]
         optionsArr[i].textContent=randomChoice
         optionsArr[i].addEventListener("click", checkSelection)
+        optionsArr[i].classList.add("optBtns_hover")
         choices.splice(randomNum,1)
     }  
 }
@@ -377,6 +389,7 @@ function playRound () {
 
 function timer () {
     timeLeft.textContent = count
+
     if (count === 0 && !madeSelection) {
         
         clearInterval(countdown)
@@ -384,14 +397,14 @@ function timer () {
         madeSelection=true
         round++
         songId.textContent=`Time is up! The answer is ${currentSong.title} by ${currentSong.artist}`
-        console.log("time's up!")
+  
         if (round<3) {
             switchPlayer()
     
-            setTimeout(playRound,400)
+            setTimeout(playRound,3000)
         }
         else {
-            setTimeout(endGame, 400)
+            setTimeout(endGame, 3000)
         }
     }
     count --
@@ -408,6 +421,9 @@ function checkSelection (e) {
 
     // prevents player from reselecting a choice from current question
     if (madeSelection) return
+    optionsArr.forEach(item => {
+        item.classList.remove("optBtns_hover")
+    })
     clearInterval(countdown)
     madeSelection=true
 
@@ -430,20 +446,20 @@ function checkSelection (e) {
     else {
         playIncorrectSound ()
         e.target.classList.add("wrong") 
-        songId.textContent=`Error!!! The answer is ${currentSong.title} by ${currentSong.artist}`
+        songId.textContent=`Incorrect!!! The answer is ${currentSong.title} by ${currentSong.artist}`
         console.log("wrong!")
     }
     setTimeout(function () {
         e.target.classList.remove("correct")
         e.target.classList.remove("wrong")
-    },390)
+    },2900)
     if (round<3) {
         switchPlayer()
 
-        setTimeout(playRound,400)
+        setTimeout(playRound,3000)
     }
     else {
-        setTimeout(endGame, 400)
+        setTimeout(endGame, 3000)
     }
 
 }
