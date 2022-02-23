@@ -5,12 +5,12 @@
 #title {
     margin-top: 50px;
     font-family: 'Audiowide', cursive;
-    font-size: 70px;
+    font-size: 90px;
     text-shadow: 6px 5px #833737;
     color: white;
 }
 
-span {
+span, #endTitle {
     font-family: 'Permanent Marker', cursive;
     animation-name: multicolor;
     animation-duration: 1s;
@@ -37,10 +37,11 @@ span {
 }
 
 #rules {
-    font-size: 25px;
+    font-size: 30px;
     font-family: 'Padauk', sans-serif;
     font-weight: bold;
     text-align: center;
+    color: white;
 }
 
 
@@ -104,12 +105,13 @@ span {
 #question {
     font-size: 50px;
     font-family: 'Audiowide', cursive;
-
+    color: white;
 }
 
 #lyricLine, #songId {
     font-size: 40px;
     font-family: 'Padauk', sans-serif;
+    color: white;
 }
 
 
@@ -121,9 +123,10 @@ button {
 .optBtns {
     background: white;
     color: rgb(44, 44, 233);
+    font-size: 25px;
 }
 
-.optBtns:hover {
+.optBtns_hover:hover {
     background: rgb(44, 44, 233);
     color: white;
 }
@@ -179,14 +182,19 @@ button {
 }
 
 #endTitle {
-    font-size: 40px;
+    font-size: 50px;
     margin-top: 100px;
 }
 
+#player1SB,#player2SB {
+    font-size: 30px;
+    color: white;
+}
 
   #homeBtn {
       background-color: rgb(105, 23, 105);
       color: white;
+      font-size: 25px;
       margin-top: 30px;
   }
 
