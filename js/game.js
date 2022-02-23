@@ -46,6 +46,8 @@ let choices = []
 let randomNum
 let wrongAnsList = []
 let madeSelection = false
+let count = 3
+let countdown 
 
 
 /* ~~~~~~~~~~~~~~~~~ CLASSES ~~~~~~~~~~~~~~~~ */
@@ -255,6 +257,8 @@ function startGame () {
 // playRound - will animate the lyrics and then prompt player 1 what is the next line
 
 function playRound () {
+    count = 3
+    countdown = setInterval (timer, 1000)
     madeSelection=false
     songId.textContent=""
     wrongAnsList=[]
@@ -281,6 +285,38 @@ function playRound () {
 }
 
 
+// timer - displays time left to answer the question
+
+function timer () {
+    if (count === 0 && !madeSelection) {
+        
+        clearInterval(countdown)
+        playIncorrectSound ()
+        songId.textContent=`Time is up! The answer is ${currentSong.title} by ${currentSong.artist}`
+        console.log("time's up!")
+        if (round<3) {
+            switchPlayer()
+    
+            setTimeout(playRound,400)
+        }
+        else {
+            setTimeout(endGame, 400)
+        }
+    }
+    else {
+        console.log("time remaining", count)
+    }
+    count --
+}
+
+
+
+
+
+
+
+
+
 
 
 // checkSelection - will determine if the player selected the right answer
@@ -291,7 +327,7 @@ function checkSelection (e) {
 
     // prevents player from reselecting a choice from current question
     if (madeSelection) return
-
+    clearInterval(countdown)
     madeSelection=true
 
     round++
@@ -419,8 +455,6 @@ function returnHome () {
 
 // Play button event listener
 startBtn.addEventListener("click",startGame)
-
-// instructions hover
 
 
 // homescreen button
