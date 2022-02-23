@@ -128,6 +128,25 @@ button {
     font-size: 20px;
 }
 
+
+.time-container {
+    position: fixed;
+    width: 75px;
+    height: 75px;
+    border-radius: 75px;
+    background-color: rgba(22, 115, 202, 0.514);
+    border: white 5px solid;
+    top: 30px;
+    left: 10px;
+    color: white;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Audiowide', cursive;
+}
+
+
 .correct {
     background-color: rgb(14, 206, 46);
     color: white;
@@ -146,6 +165,7 @@ button {
       align-items: center;
       flex-direction: column;
   }
+  
 
   #homeBtn {
       background-color: rgb(105, 23, 105);
