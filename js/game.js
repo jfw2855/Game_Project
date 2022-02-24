@@ -38,6 +38,7 @@ let questionNum = 0
 let gameSongs = []
 let currentSong
 let currentPlayer = "p1"
+let gameMusic = new Audio ()
 let correctSound = new Audio ()
 let incorrectSound = new Audio ()
 let musicLib = []
@@ -263,7 +264,6 @@ const song33 = new Song (
     "You're Still the One",
     "Shania Twain",
     "The one that I belong to"
-
 )
 
 const song34 = new Song (
@@ -331,6 +331,8 @@ function genWrongAns () {
 // startGame - hides homescreen elements and move to next
 
 function startGame () {
+    playGameMusic()
+
     makeMusicLib()
     generateSongs()
     console.log("gen song list", musicLibEdit)
@@ -345,7 +347,7 @@ function startGame () {
 
 function playRound () {
     
-    count = 1900093204923409
+    count = 10
     timeLeft.textContent = count
     countdown = setInterval (timer, 1000)
     madeSelection=false
@@ -399,7 +401,7 @@ function timer () {
         round++
         songId.textContent=`Time is up! The answer is ${currentSong.title} by ${currentSong.artist}`
   
-        if (round<3) {
+        if (round<9) {
             switchPlayer()
     
             setTimeout(playRound,3000)
@@ -454,7 +456,7 @@ function checkSelection (e) {
         e.target.classList.remove("correct")
         e.target.classList.remove("wrong")
     },3000)
-    if (round<3) {
+    if (round<9) {
         setTimeout(switchPlayer, 3000)
 
         setTimeout(playRound,3000)
@@ -472,11 +474,11 @@ function checkSelection (e) {
 function switchPlayer () {
     if (currentPlayer==="p1") {
         currentPlayer="p2"
-        displayCurrentPlayer.textContent="Player 2"
+        displayCurrentPlayer.textContent="Player 2: Pick the Correct Song!"
     }
     else {
         currentPlayer="p1"
-        displayCurrentPlayer.textContent="Player 1"
+        displayCurrentPlayer.textContent="Player 1: Pick the Correct Song!"
     }
 }
 
@@ -509,6 +511,14 @@ function endGame () {
     
 }
 
+
+// playGameMusic - plays game music
+
+function playGameMusic () {
+    gameMusic.src="sounds/game_music.wav"
+    gameMusic.loop = true
+    gameMusic.play()
+}
 
 
 // playCorrectSound - plays "correct" sound
@@ -561,6 +571,5 @@ startBtn.addEventListener("click",startGame)
 // homescreen button
 
 homeBtn.addEventListener("click",returnHome)
-
 
 
