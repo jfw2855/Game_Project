@@ -37,6 +37,9 @@ let player2Score = 0
 let questionNum = 0
 let gameSongs = []
 let currentSong
+let lyricStr 
+let lyricArr
+let lyricToAnimate
 let currentPlayer = "p1"
 let gameMusic = new Audio ()
 let correctSound = new Audio ()
@@ -50,8 +53,9 @@ let randomNum
 let wrongAnsList = []
 let madeSelection = false
 let count = 10
-let countdown 
-
+let countdown
+let lyricCount
+let showLyric
 
 /* ~~~~~~~~~~~~~~~~~ CLASSES ~~~~~~~~~~~~~~~~ */
 // song objects that will store the title, artist, lyric
@@ -343,13 +347,44 @@ function startGame () {
 
 
 
+
+
+// animateLyric - animates the lyric for the current song
+
+
+
+
+function animateLyric () {
+    if (lyricCount===0) {
+        lyricToAnimate+=`Lyric: "${lyricArr[lyricCount]} `
+    }
+    else if (lyricCount!==(lyricArr.length-1)) {
+        lyricToAnimate+=lyricArr[lyricCount] + " "
+    }
+    else {
+        lyricToAnimate+=lyricArr[lyricCount]+`"`
+        clearInterval(showLyric)
+        countdown = setInterval (timer, 1000)
+        lyricCount = 0
+        optionsArr.forEach(item => {
+            item.addEventListener("click",checkSelection)
+        })
+    }
+    lyricCount ++
+    lyricLine.textContent=lyricToAnimate
+}
+
+
+
+
+
 // playRound - prompts current player with a lyric and song title options
 
 function playRound () {
     
+    lyricCount = 0
     count = 10
     timeLeft.textContent = count
-    countdown = setInterval (timer, 1000)
     madeSelection=false
     songId.textContent=""
     wrongAnsList=[]
@@ -358,11 +393,16 @@ function playRound () {
 
     // Sets current round song based on the index of gameSongs 
     currentSong=gameSongs[questionNum]
+    lyricStr = currentSong.lyric
+    lyricArr=lyricStr.split(" ")
+    lyricToAnimate = ""
     questionNum++
 
     //Displays round's song # and lyric
+    lyricLine.textContent=""
     question.textContent=`Song Number ${questionNum}`
-    lyricLine.textContent=`Lyric: "${currentSong.lyric}"`
+    showLyric = setInterval(animateLyric, 380)
+
 
     answer=currentSong.title
 
@@ -381,7 +421,6 @@ function playRound () {
         randomNum = rndNum(choices.length)
         randomChoice = choices[randomNum]
         optionsArr[i].textContent=randomChoice
-        optionsArr[i].addEventListener("click", checkSelection)
         optionsArr[i].classList.add("optBtns_hover")
         choices.splice(randomNum,1)
     }  
@@ -423,9 +462,9 @@ function timer () {
 function checkSelection (e) {
 
     // prevents player from reselecting a choice from current question
-    if (madeSelection) return
     optionsArr.forEach(item => {
         item.classList.remove("optBtns_hover")
+        item.removeEventListener("click", checkSelection)
     })
     clearInterval(countdown)
     madeSelection=true
@@ -577,24 +616,3 @@ homeBtn.addEventListener("click",returnHome)
 
 
 
-lyricCount = 0
-
-
-
-let lyricStr = "DOES THIS WORK?"
-let lyricArr=lyricStr.split(" ")
-let lyricToAnimate = ""
-
-function animateLyric () {
-    if (lyricCount!==(lyricArr.length-1)) {
-        lyricToAnimate+=lyricArr[lyricCount]+" "
-    }
-    else {
-        lyricToAnimate+=lyricArr[lyricCount]
-        clearInterval(showLyric)
-        lyricCount = 0
-    }
-    lyricCount ++
-    console.log("animating lyric",lyricToAnimate)
-}
-let showLyric = setInterval(animateLyric,750)
