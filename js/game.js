@@ -547,7 +547,7 @@ function returnHome () {
     player2Score = 0
     questionNum = 0
     gameSongs = []
-    currentSongn = ""
+    currentSong = ""
     currentPlayer = "p1"
     musicLib = []
     musicLibEdit = ""
@@ -573,3 +573,28 @@ startBtn.addEventListener("click",startGame)
 homeBtn.addEventListener("click",returnHome)
 
 
+
+
+
+
+lyricCount = 0
+
+
+
+let lyricStr = "DOES THIS WORK?"
+let lyricArr=lyricStr.split(" ")
+let lyricToAnimate = ""
+
+function animateLyric () {
+    if (lyricCount!==(lyricArr.length-1)) {
+        lyricToAnimate+=lyricArr[lyricCount]+" "
+    }
+    else {
+        lyricToAnimate+=lyricArr[lyricCount]
+        clearInterval(showLyric)
+        lyricCount = 0
+    }
+    lyricCount ++
+    console.log("animating lyric",lyricToAnimate)
+}
+let showLyric = setInterval(animateLyric,750)
