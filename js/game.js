@@ -347,20 +347,22 @@ function startGame () {
 
 
 
-
-
 // animateLyric - animates the lyric for the current song
 
-
-
-
 function animateLyric () {
+
+    // Starts first part of lyric
     if (lyricCount===0) {
         lyricToAnimate+=`Lyric: "${lyricArr[lyricCount]} `
     }
+
+    // Adds words to middle section of lyric
     else if (lyricCount!==(lyricArr.length-1)) {
         lyricToAnimate+=lyricArr[lyricCount] + " "
     }
+
+    // Adds last word to lyric and removes showLyric interval
+        // begins timer for player to make a selection
     else {
         lyricToAnimate+=lyricArr[lyricCount]+`"`
         clearInterval(showLyric)
@@ -371,10 +373,10 @@ function animateLyric () {
         })
     }
     lyricCount ++
+
+    //Animates lyric based on current index of the lyricArr
     lyricLine.textContent=lyricToAnimate
 }
-
-
 
 
 
@@ -398,18 +400,17 @@ function playRound () {
     lyricToAnimate = ""
     questionNum++
 
-    //Displays round's song # and lyric
+    //Displays round's song # and animates lyric
     lyricLine.textContent=""
     question.textContent=`Song Number ${questionNum}`
     showLyric = setInterval(animateLyric, 380)
 
 
+    // Sets answer to question and creates an array of choice (starting with answer)
     answer=currentSong.title
-
-    // Creates choices
     choices = [answer]
 
-    // Pulls array from genWrongAns() to populate choices array with the wrong answers
+    // Pops/Pushes each index from genWrongAns() to populate choices array with the wrong answers
     while (wrongAnsList.length>0) {
         let nextNum = wrongAnsList.pop()
         choices.push(musicLibEdit[nextNum].title)
@@ -471,13 +472,17 @@ function checkSelection (e) {
 
     round++
 
+    // Sets the button clicked to playerSelection
     let playerSelection = e.target.textContent
 
+    // Player makes correct selection, plays correct sound and displays green background
+    //for the button selected
     if (playerSelection===answer) {
         playCorrectSound()
         e.target.classList.add("correct")
         songId.textContent=`Correct!!! The answer is ${currentSong.title} by ${currentSong.artist}`
-        console.log("correct!")
+
+        // Adds 1 point to the current player's score
         if (currentPlayer==="p1") {
             player1Score++
         }
@@ -485,21 +490,26 @@ function checkSelection (e) {
             player2Score++
         }
     }
+    //Player makes incorrect selection, plays incorrect sound and displays red background 
+    // for the button selected
     else {
         playIncorrectSound ()
         e.target.classList.add("wrong") 
         songId.textContent=`Incorrect!!! The answer is ${currentSong.title} by ${currentSong.artist}`
-        console.log("wrong!")
     }
+    // Removes selected choices background (green or red)
     setTimeout(function () {
         e.target.classList.remove("correct")
         e.target.classList.remove("wrong")
     },3000)
+
+    //Continues game 
     if (round<9) {
         setTimeout(switchPlayer, 3000)
 
         setTimeout(playRound,3000)
     }
+    //Moves to endGame
     else {
         setTimeout(endGame, 3000)
     }
@@ -508,7 +518,7 @@ function checkSelection (e) {
 
 
 
-// switchPlayer - switches to the next song and remove the lyrics from previous song
+// switchPlayer - switches to the next player
 
 function switchPlayer () {
     if (currentPlayer==="p1") {
