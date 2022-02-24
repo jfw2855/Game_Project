@@ -10,6 +10,7 @@ const help = document.getElementById("help")
 const gameContainer = document.getElementById("game-container")
 gameContainer.style.display="none"
 const question = document.getElementById("question")
+const displayCurrentPlayer = document.getElementById("current-player")
 const lyricLine = document.getElementById("lyricLine")
 const songId = document.getElementById("songId")
 const timeLeft = document.getElementById("timeLeft")
@@ -344,7 +345,7 @@ function startGame () {
 
 function playRound () {
     
-    count = 10
+    count = 1900093204923409
     timeLeft.textContent = count
     countdown = setInterval (timer, 1000)
     madeSelection=false
@@ -452,9 +453,9 @@ function checkSelection (e) {
     setTimeout(function () {
         e.target.classList.remove("correct")
         e.target.classList.remove("wrong")
-    },2900)
+    },3000)
     if (round<3) {
-        switchPlayer()
+        setTimeout(switchPlayer, 3000)
 
         setTimeout(playRound,3000)
     }
@@ -471,9 +472,11 @@ function checkSelection (e) {
 function switchPlayer () {
     if (currentPlayer==="p1") {
         currentPlayer="p2"
+        displayCurrentPlayer.textContent="Player 2"
     }
     else {
         currentPlayer="p1"
+        displayCurrentPlayer.textContent="Player 1"
     }
 }
 
@@ -543,6 +546,7 @@ function returnHome () {
     choices = []
     wrongAnsList = []
     madeSelection = false
+    displayCurrentPlayer.textContent="Player 1"
 
 }
 
