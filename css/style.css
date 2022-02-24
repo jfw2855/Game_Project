@@ -120,7 +120,16 @@ span, #endTitle {
 
 #current-player {
     font-size: 35px;
-}
+
+    padding: 5px;
+    animation-name: shadowcolor;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    text-shadow: 2px 2px #3c1c79;
+  }
+
+
+
 
 
 button {
@@ -129,26 +138,30 @@ button {
 
 .optBtns {
     background: white;
-    color: rgb(44, 44, 233);
+    color: rgba(39, 39, 134, 0.87);
     font-size: 25px;
+    margin: 2px;
 }
 
 .optBtns_hover:hover {
-    background: rgb(44, 44, 233);
+    background: rgba(39, 39, 134, 0.87);
     color: white;
 }
 
 #songId {
     font-size: 25px;
-    color: rgb(216, 221, 221);
+    color: white;
     font-family: 'Audiowide', cursive;
     margin-bottom: 20px;
-
+    background-color: rgb(10, 131, 91);
 }
+
 
 .choiceBtns {
     position: fixed;
     top: 50%;
+    display: flex;
+    flex-direction: column;
 
 }
 
