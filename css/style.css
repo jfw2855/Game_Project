@@ -106,14 +106,21 @@ span, #endTitle {
     font-size: 50px;
     font-family: 'Audiowide', cursive;
     color: white;
+    margin-top: 30px;
+    margin-bottom: 15px;
 }
 
-#lyricLine, #songId {
+#current-player, #lyricLine, #songId {
     font-size: 40px;
     font-family: 'Padauk', sans-serif;
     color: white;
+    margin-bottom: 5px;
+    margin-top: 20px;
 }
 
+#current-player {
+    font-size: 35px;
+}
 
 
 button {
@@ -135,9 +142,15 @@ button {
     font-size: 25px;
     color: rgb(216, 221, 221);
     font-family: 'Audiowide', cursive;
+    margin-bottom: 20px;
 
 }
 
+.choiceBtns {
+    position: fixed;
+    top: 50%;
+
+}
 
 .time-container {
     position: fixed;
