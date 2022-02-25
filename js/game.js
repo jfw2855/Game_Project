@@ -437,6 +437,10 @@ function timer () {
         
         clearInterval(countdown)
         playIncorrectSound ()
+        optionsArr.forEach(item => {
+            item.classList.remove("optBtns_hover")
+            item.removeEventListener("click", checkSelection)
+        })
         madeSelection=true
         round++
         songId.textContent=`Time is up! The answer is ${currentSong.title} by ${currentSong.artist}`
