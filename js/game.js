@@ -1,12 +1,16 @@
 
 
 /* ~~~~~~~~~~~~~~~~~DOM VARIABLES ~~~~~~~~~~~~~~~~ */
+//defined DOM variables that will be used to manipulate the DOM
 
+//homescreen DOM variables
 const homeContainer = document.getElementById("home-container")
 const title = document.getElementById("title")
 const rules = document.getElementById("rules")
 const startBtn = document.getElementById("start")
 const help = document.getElementById("help")
+
+//gamescreen DOM variables
 const gameContainer = document.getElementById("game-container")
 gameContainer.style.display="none"
 const question = document.getElementById("question")
@@ -19,6 +23,8 @@ const option2 = document.getElementById("option2")
 const option3 = document.getElementById("option3")
 const option4 = document.getElementById("option4")
 let optionsArr = [option1,option2,option3,option4]
+
+//endgame DOM variables
 const endContainer = document.getElementById("end-container")
 const endTitle = document.getElementById("endTitle")
 endContainer.style.display="none"
@@ -323,6 +329,7 @@ function generateSongs () {
 
 function genWrongAns () {
     while (wrongAnsList.length<3) {
+        //keeps generating a random number until it is not in the wrongAnsList
         randomNum=rndNum(musicLibEdit.length)
         if (!wrongAnsList.includes(randomNum)) {
             wrongAnsList.push(randomNum)
@@ -336,10 +343,9 @@ function genWrongAns () {
 
 function startGame () {
     playGameMusic()
-
+    //creates the songs that will be used for the 8 rounds
     makeMusicLib()
     generateSongs()
-    console.log("gen song list", musicLibEdit)
     playRound()
     homeContainer.style.display="none"
     gameContainer.style.display="flex"
@@ -368,6 +374,7 @@ function animateLyric () {
         clearInterval(showLyric)
         countdown = setInterval (timer, 1000)
         lyricCount = 0
+        //Adds an event listener to each option button
         optionsArr.forEach(item => {
             item.addEventListener("click",checkSelection)
         })
@@ -385,6 +392,7 @@ function animateLyric () {
 function playRound () {
     
     lyricCount = 0
+     //resets timer to say 10 seconds
     count = 10
     timeLeft.textContent = count
     madeSelection=false
@@ -433,10 +441,12 @@ function playRound () {
 function timer () {
     timeLeft.textContent = count
 
+    // if player doesn't select an answer & time runs out
     if (count === 0 && !madeSelection) {
         
         clearInterval(countdown)
         playIncorrectSound ()
+        // prevents player to select an option once time is up
         optionsArr.forEach(item => {
             item.classList.remove("optBtns_hover")
             item.removeEventListener("click", checkSelection)
@@ -444,12 +454,13 @@ function timer () {
         madeSelection=true
         round++
         songId.textContent=`Time is up! The answer is ${currentSong.title} by ${currentSong.artist}`
-  
+        // continues game
         if (round<9) {
             switchPlayer()
     
             setTimeout(playRound,3000)
         }
+        //ends game
         else {
             setTimeout(endGame, 3000)
         }
